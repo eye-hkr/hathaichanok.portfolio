@@ -22,8 +22,22 @@
         <a href="#resume" class="nav-resume">Resume <i class="ph ph-download-simple"></i></a>
         <a href="#contact" class="btn-pill">Let's talk</a>
       </div>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="about.html" class="mobile-menu-link">About me</a>
+    <a href="#works" class="mobile-menu-link">Selected Works</a>
+    <a href="#resume" class="mobile-menu-link">Resume <i class="ph ph-download-simple"></i></a>
+    <a href="#contact" class="mobile-menu-link btn-pill">Let's talk</a>
+  </div>
+  <div class="mobile-overlay" aria-hidden="true"></div>
 
   <!-- Hero -->
   <section class="hero">
@@ -249,5 +263,30 @@
     </div>
   </footer>
 
+  <script>
+    const hamburger = document.querySelector('.nav-hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.querySelector('.mobile-overlay');
+
+    function toggleMenu(open) {
+      hamburger.classList.toggle('is-open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      mobileMenu.classList.toggle('is-open', open);
+      mobileMenu.setAttribute('aria-hidden', !open);
+      overlay.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('is-open');
+      toggleMenu(!isOpen);
+    });
+
+    overlay.addEventListener('click', () => toggleMenu(false));
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+  </script>
 </body>
 </html>
