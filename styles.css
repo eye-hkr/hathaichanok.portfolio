@@ -66,7 +66,7 @@ a {
 .nav {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 300;
   background-color: #f0ece6;
   padding: 18px 0;
 }
@@ -117,13 +117,15 @@ a {
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 4px;
   flex-shrink: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-hamburger span {
@@ -163,11 +165,13 @@ a {
   flex-direction: column;
   gap: 32px;
   transform: translateX(100%);
+  pointer-events: none;
   transition: transform 0.3s ease;
 }
 
 .mobile-menu.is-open {
   transform: translateX(0);
+  pointer-events: auto;
 }
 
 .mobile-menu-link {
@@ -197,11 +201,13 @@ a {
   background: rgba(0, 0, 0, 0.35);
   z-index: 150;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
 .mobile-overlay.is-open {
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* ─── Hero ─── */
@@ -651,9 +657,21 @@ a {
     padding-right: 28px;
   }
 
-  /* Nav */
+  /* Nav: hide desktop links, show hamburger */
   .nav-links {
-    gap: 16px;
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .mobile-overlay {
+    display: block;
   }
 
   /* Hero */
@@ -713,23 +731,6 @@ a {
   .nav-inner {
     padding-left: 20px;
     padding-right: 20px;
-  }
-
-  /* Nav: hide desktop links, show hamburger */
-  .nav-links {
-    display: none;
-  }
-
-  .nav-hamburger {
-    display: flex;
-  }
-
-  .mobile-menu {
-    display: flex;
-  }
-
-  .mobile-overlay {
-    display: block;
   }
 
   /* Hero */
